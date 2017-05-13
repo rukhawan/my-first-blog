@@ -1,22 +1,13 @@
-<html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
+{% extends 'myblog/base.html' %}
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Aachen has proved an important site for the production of historical manuscripts. Under Charlemagne's purview, both the Ada Gospels and the Coronation Gospels may have been produced in Aachen.[28] In addition, quantities of the other texts in the court library were also produced locally. During the reign of Louis the Pious (814–840), substantial quantities of ancient texts were produced at Aachen, including legal manuscripts such as the leges scriptorium group, patristic texts including the five manuscripts of the Bamberg Pliny Group.[28] Finally, under Lothair I (840–855), texts of outstanding quality were still being produced. This however marked the end of the period of manuscript production at Aachen.</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Aachen is located in the middle of the Meuse–Rhine Euroregion, close to the border tripoint of Germany, the Netherlands, and Belgium. The city of Heerlen in the Netherlands lies nearby, as does Eupen, the capital of the German-speaking Community of Belgium, both located about 20 km (12.4 mi) from Aachen's city centre. Aachen lies near the head of the open valley of the River Wurm (which today flows through the city in canalised form), part of the larger basin of the River Meuse, and about 30 km (19 mi) north of the High Fens, which form the northern edge of the Eifel uplands of the Rhenish Massif.</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
